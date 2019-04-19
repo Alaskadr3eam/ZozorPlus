@@ -14,6 +14,7 @@ class CalculViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
+    @IBOutlet var operatorButtons: [UIButton]!
     override func viewDidLoad() {
         calculates.delegateAlert = self
         calculates.delegateScreen = self
@@ -25,20 +26,18 @@ class CalculViewController: UIViewController {
             }
     }
 
-    @IBAction func plus() {
-        calculates.addition()
-    }
-
-    @IBAction func minus() {
-       calculates.soustraction()
-    }
-
-    @IBAction func multi() {
-        calculates.multiplication()
-    }
-
-    @IBAction func diviser() {
-        calculates.division()
+    @IBAction func tappedOperatorButton(_ sender: UIButton) {
+            switch sender.tag {
+            case 1:
+                calculates.addOperation(.addition)
+            case 2:
+                calculates.addOperation(.soustraction)
+            case 3:
+                calculates.addOperation(.multiplication)
+            case 4:
+                calculates.addOperation(.division)
+            default: break
+            }
     }
 
     @IBAction func equal() {

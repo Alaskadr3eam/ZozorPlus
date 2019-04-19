@@ -16,6 +16,8 @@ class Calculate {
     var index1 = 0
     var delegateAlert: CommunicationAlert?
     var delegateScreen: UpdateDisplayCalcul?
+    var total = 0
+    
    // var total = calculateTotal
 
     var isExpressionCorrect: Bool {
@@ -64,7 +66,7 @@ class Calculate {
         delegateScreen?.itIsToDisplay(text: text)
     }
 
-    func operation(_ sign: Operator) {
+    func addOperation(_ sign: Operator) {
         if canAddOperator {
             operators.append(sign)
             stringNumbers.append("")
@@ -72,27 +74,11 @@ class Calculate {
         }
     }
 
-    func addition() {
-        operation(.addition)
-    }
-
-    func soustraction() {
-       operation(.soustraction)
-    }
-
-    func multiplication() {
-        operation(.multiplication)
-    }
-
-    func division() {
-        operation(.division)
-    }
-
     func calculateTotal() {
         if !isExpressionCorrect {
             return
         }
-            var total = 0
+            //var total = 0
             for (index, stringNumber) in stringNumbers.enumerated() {
                 if let number = Int(stringNumber) {
                     switch operators[index] {
@@ -108,6 +94,7 @@ class Calculate {
                 }
             }
             delegateScreen?.itIsResultt(total: total)
+        
         }
 
     func clear() {
