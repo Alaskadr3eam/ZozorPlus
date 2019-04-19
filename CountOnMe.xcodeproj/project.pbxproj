@@ -91,9 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				C926DADE1D7581BB00477020 /* CalculViewController.swift */,
-				313A6D192268797800521849 /* ViewControllerExt.swift */,
-				313A6D1E2268E25500521849 /* protocolAlert.swift */,
-				313A6D222269AD4100521849 /* protocoleUpdateDisplay.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -112,6 +109,9 @@
 		313A6D182268796B00521849 /* UtilityExt */ = {
 			isa = PBXGroup;
 			children = (
+				313A6D192268797800521849 /* ViewControllerExt.swift */,
+				313A6D1E2268E25500521849 /* protocolAlert.swift */,
+				313A6D222269AD4100521849 /* protocoleUpdateDisplay.swift */,
 				313A6D1A2268797D00521849 /* ButtonExt.swift */,
 				313A6D1B22687AB200521849 /* DoubleExt.swift */,
 			);

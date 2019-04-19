@@ -17,7 +17,7 @@ class Calculate {
     var delegateAlert: CommunicationAlert?
     var delegateScreen: UpdateDisplayCalcul?
     var total = 0
-    
+
    // var total = calculateTotal
 
     var isExpressionCorrect: Bool {
@@ -94,7 +94,7 @@ class Calculate {
                 }
             }
             delegateScreen?.itIsResultt(total: total)
-        
+
         }
 
     func clear() {
