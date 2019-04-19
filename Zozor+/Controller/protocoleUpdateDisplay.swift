@@ -7,13 +7,14 @@
 //
 
 import Foundation
+extension CalculViewController: UpdateDisplayCalcul {
 
-extension CalculViewController: updateDisplayCalcul{
-    
     func itIsResultt(total: Int) {
-        textView.text = textView.text + "=\(total)"
-        
-    }
-    
-}
+        textView.text += "=\(total)"
+        }
 
+    func itIsToDisplay(text: String) {
+        textView.text = text
+    }
+}
+// textView.text = textView.text + "=\(total)"

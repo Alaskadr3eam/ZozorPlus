@@ -7,83 +7,121 @@
 //
 
 import Foundation
-import UIKit
 
 class Calculate {
-    
+
     // MARK: - Properties
     var stringNumbers: [String] = [String()]
-    var operators: [Operator] = [.Addition]
-    var index = 0
-    var delegate: communicationAlert?
-    var delegate1: updateDisplayCalcul?
-    var total = calculateTotal
-    
+    var operators: [Operator] = [.addition]
+    var index1 = 0
+    var delegateAlert: CommunicationAlert?
+    var delegateScreen: UpdateDisplayCalcul?
+   // var total = calculateTotal
+
     var isExpressionCorrect: Bool {
         if let stringNumber = stringNumbers.last {
-            if stringNumber.isEmpty{
-                if stringNumbers.count == 1{
-                    delegate?.itIsAlert(title: "Zéro!", message: "Démarrez un nouveau calcul !", preferredStyle: .alert)
+            if stringNumber.isEmpty {
+                if stringNumbers.count == 1 {
+                    delegateAlert?.itIsAlert(title: "Zéro!", message: "Démarrez un nouveau calcul !")
                 } else {
-                    delegate?.itIsAlert(title: "Zéro", message: "Entrez une expression correcte !", preferredStyle: .alert)
+                    delegateAlert?.itIsAlert(title: "Zéro", message: "Entrez une expression correcte !")
                 }
                 return false
             }
         }
         return true
     }
-    
+
     var canAddOperator: Bool {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
-              delegate?.itIsAlert(title: "Zéro!", message: "Expression incorrecte !", preferredStyle: .alert)
+              delegateAlert?.itIsAlert(title: "Zéro!", message: "Expression incorrecte !")
                 return false
             }
         }
         return true
     }
-    
-    
-    func calculateTotal(){
-        if !isExpressionCorrect{
+
+    func addNewNumber(_ newNumber: Int) {
+        if let stringNumber = stringNumbers.last {
+            var stringNumberMutable = stringNumber
+            stringNumberMutable += "\(newNumber)"
+            stringNumbers[stringNumbers.count-1] = stringNumberMutable
+        }
+        updateDisplay()
+    }
+
+    func updateDisplay() {
+        var text = ""
+        for (index, stringNumber) in  stringNumbers.enumerated() {
+            // Add operator
+            if index > 0 {
+                text += operators[index].displayString
+            }
+            // Add number
+            text += stringNumber
+        }
+        delegateScreen?.itIsToDisplay(text: text)
+    }
+
+    func operation(_ sign: Operator) {
+        if canAddOperator {
+            operators.append(sign)
+            stringNumbers.append("")
+            updateDisplay()
+        }
+    }
+
+    func addition() {
+        operation(.addition)
+    }
+
+    func soustraction() {
+       operation(.soustraction)
+    }
+
+    func multiplication() {
+        operation(.multiplication)
+    }
+
+    func division() {
+        operation(.division)
+    }
+
+    func calculateTotal() {
+        if !isExpressionCorrect {
             return
         }
             var total = 0
-            for (i, stringNumber) in stringNumbers.enumerated() {
+            for (index, stringNumber) in stringNumbers.enumerated() {
                 if let number = Int(stringNumber) {
-                    switch operators[i]{
-                    case .Addition:
+                    switch operators[index] {
+                    case .addition:
                         total += number
-                    case .Soustraction:
+                    case .soustraction:
                         total -= number
-                    case .Multiplication:
+                    case .multiplication:
                         total *= number
-                    case .Division:
+                    case .division:
                         total /= number
                     }
                 }
-                
             }
-            delegate1?.itIsResultt(total: total)
-            
+            delegateScreen?.itIsResultt(total: total)
         }
-    
-        
+
     func clear() {
         stringNumbers = [String()]
-        operators = [.Addition]
-        index = 0
+        operators = [.addition]
+        index1 = 0
     }
-    
-
- 
- 
 }
 
-protocol communicationAlert{
-    func itIsAlert(title: String, message: String, preferredStyle: UIAlertController.Style)
+protocol CommunicationAlert {
+    func itIsAlert(title: String, message: String)
 }
-protocol updateDisplayCalcul{
+
+protocol UpdateDisplayCalcul {
     func itIsResultt(total: Int)
-    
+    func itIsToDisplay(text: String)
 }

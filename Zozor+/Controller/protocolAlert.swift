@@ -8,13 +8,9 @@
 
 import Foundation
 
-extension CalculViewController: communicationAlert{
-    
+extension CalculViewController: CommunicationAlert {
+
     func itIsAlert(title: String, message: String) {
         alertVC(title: title, message: message)
     }
-    
-    
-
-    
 }

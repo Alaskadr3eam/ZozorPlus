@@ -8,101 +8,42 @@
 
 import UIKit
 
-class CalculController: UIViewController, communicationAlert, updateDisplayCalcul  {
-    
+class CalculViewController: UIViewController {
+
     var calculates = Calculate()
-    
+
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
-    
     override func viewDidLoad() {
-        calculates.delegate = self
+        calculates.delegateAlert = self
         calculates.delegateScreen = self
     }
-    
-    @IBAction func tappedNumberButton(_ sender: UIButton){
-        for (i, numberButton) in numberButtons.enumerated() {
-            if sender == numberButton {
-                addNewNumber(i)
+
+    @IBAction func tappedNumberButton(_ sender: UIButton) {
+        for (index, numberButton) in numberButtons.enumerated() where sender == numberButton {
+                calculates.addNewNumber(index)
             }
-        }
-        
     }
-    
-    func addNewNumber(_ newNumber: Int){
-        if let stringNumber = calculates.stringNumbers.last {
-            var stringNumberMutable = stringNumber
-            stringNumberMutable += "\(newNumber)"
-            calculates.stringNumbers[calculates.stringNumbers.count-1] = stringNumberMutable
-        }
-        updateDisplay()
-    }
-    
-    func updateDisplay() {
-        var text = ""
-        for (i, stringNumber) in calculates.stringNumbers.enumerated() {
-            // Add operator
-            if i > 0 {
-                text += calculates.operators[i].displayString
-            }
-            // Add number
-            text += stringNumber
-        }
-        textView.text = text
-    }
-    
-    
- 
-    func itIsResultt(total: Int) {
-        textView.text = textView.text + "=\(total)"
-        
-    }
-    
-    func itIsAlert(title: String, message: String, preferredStyle: UIAlertController.Style) {
-        alertVC(title: title, message: message, preferredStyle: preferredStyle)
-    }
-    
+
     @IBAction func plus() {
-        if calculates.canAddOperator {
-            calculates.operators.append(.Addition)
-            calculates.stringNumbers.append("")
-            updateDisplay()
-        }
+        calculates.addition()
     }
-    
+
     @IBAction func minus() {
-        if calculates.canAddOperator {
-            calculates.operators.append(.Soustraction)
-            calculates.stringNumbers.append("")
-            updateDisplay()
-        }
+       calculates.soustraction()
     }
-    
-    @IBAction func multi(){
-        if calculates.canAddOperator{
-            calculates.operators.append(.Multiplication)
-            calculates.stringNumbers.append("")
-            updateDisplay()
-        }
+
+    @IBAction func multi() {
+        calculates.multiplication()
     }
-    
-    @IBAction func diviser(){
-        if calculates.canAddOperator{
-            calculates.operators.append(.Division)
-            calculates.stringNumbers.append("")
-            updateDisplay()
-        }
+
+    @IBAction func diviser() {
+        calculates.division()
     }
-    
+
     @IBAction func equal() {
         calculates.calculateTotal()
         calculates.clear()
     }
 
-
-
 }
-
-
-
-

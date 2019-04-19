@@ -9,17 +9,17 @@
 import Foundation
 
 enum Operator {
-    case Addition, Soustraction, Multiplication, Division
-    
-    var displayString: String{
+    case addition, soustraction, multiplication, division
+
+    var displayString: String {
         switch self {
-        case.Addition:
+        case.addition:
             return "+"
-        case.Division:
+        case.division:
             return "÷"
-        case.Multiplication:
+        case.multiplication:
             return "x"
-        case.Soustraction:
+        case.soustraction:
             return "-"
         }
     }
