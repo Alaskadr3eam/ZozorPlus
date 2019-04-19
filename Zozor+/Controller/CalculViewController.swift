@@ -17,7 +17,7 @@ class CalculController: UIViewController, communicationAlert, updateDisplayCalcu
     
     override func viewDidLoad() {
         calculates.delegate = self
-        calculates.delegate1 = self
+        calculates.delegateScreen = self
     }
     
     @IBAction func tappedNumberButton(_ sender: UIButton){
@@ -103,12 +103,6 @@ class CalculController: UIViewController, communicationAlert, updateDisplayCalcu
 
 }
 
-extension UIViewController {
-    func alertVC(title: String, message: String, preferredStyle: UIAlertController.Style){
-        let alertVC = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alertVC, animated: true, completion: nil)
-    }
-}
+
 
 
