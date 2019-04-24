@@ -35,7 +35,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="256"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="GZQ-ZL-Chx">
-                                                        <rect key="frame" x="0.0" y="0.0" width="107.5" height="178"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="107.5" height="245"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uw-jf-qlX">
                                                                 <rect key="frame" x="0.0" y="0.0" width="107.5" height="44"/>
@@ -68,6 +68,17 @@
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="tappedNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8fJ-BS-blu"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j6M-Eg-fNs">
+                                                                <rect key="frame" x="0.0" y="201" width="107.5" height="44"/>
+                                                                <color key="backgroundColor" red="0.60392156860000001" green="0.57647058819999997" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                                <state key="normal" title=",">
+                                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="tappedNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RNP-dh-erZ"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -122,7 +133,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="e5M-ww-B3O">
-                                                        <rect key="frame" x="235.5" y="0.0" width="107.5" height="178"/>
+                                                        <rect key="frame" x="235.5" y="0.0" width="107.5" height="245"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdG-Q6-4Mj">
                                                                 <rect key="frame" x="0.0" y="0.0" width="107.5" height="44"/>
@@ -157,13 +168,23 @@
                                                                     <action selector="tappedNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bfp-rf-bx9"/>
                                                                 </connections>
                                                             </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0TJ-Fv-Ie5">
+                                                                <rect key="frame" x="0.0" y="201" width="107.5" height="44"/>
+                                                                <color key="backgroundColor" red="0.60392156860000001" green="0.57647058819999997" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                                <state key="normal" title="MEM">
+                                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="cleanMem" destination="BYZ-38-t0r" eventType="touchUpInside" id="72e-UC-3A4"/>
+                                                                    <action selector="mem" destination="BYZ-38-t0r" eventType="touchUpInside" id="E8d-H7-dfF"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="XdB-qG-jU9" firstAttribute="top" secondItem="aiF-me-Far" secondAttribute="top" id="0Fe-Iu-6zX"/>
-                                                    <constraint firstAttribute="bottom" secondItem="e5M-ww-B3O" secondAttribute="bottom" constant="78" id="HmG-VA-HyW"/>
-                                                    <constraint firstAttribute="bottom" secondItem="GZQ-ZL-Chx" secondAttribute="bottom" constant="78" id="IAa-fj-IsA"/>
                                                     <constraint firstAttribute="bottom" secondItem="XdB-qG-jU9" secondAttribute="bottom" constant="11" id="cIx-qA-Vae"/>
                                                     <constraint firstItem="e5M-ww-B3O" firstAttribute="top" secondItem="aiF-me-Far" secondAttribute="top" id="fYl-jp-zSi"/>
                                                     <constraint firstItem="GZQ-ZL-Chx" firstAttribute="top" secondItem="aiF-me-Far" secondAttribute="top" id="lS4-yR-Jks"/>
@@ -265,6 +286,7 @@
                         <outletCollection property="operatorButtons" destination="1md-mv-IxN" collectionClass="NSMutableArray" id="CfG-Hx-7Yv"/>
                         <outletCollection property="operatorButtons" destination="eaU-C8-4su" collectionClass="NSMutableArray" id="r1k-Z0-G8C"/>
                         <outletCollection property="operatorButtons" destination="b8w-Wo-JZV" collectionClass="NSMutableArray" id="N5L-B9-YPD"/>
+                        <outletCollection property="numberButtons" destination="j6M-Eg-fNs" collectionClass="NSMutableArray" id="VEC-lS-CWi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

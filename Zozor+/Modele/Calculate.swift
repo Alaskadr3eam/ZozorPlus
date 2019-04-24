@@ -13,10 +13,12 @@ class Calculate {
     // MARK: - Properties
     var stringNumbers: [String] = [String()]
     var operators: [Operator] = [.addition]
-    var index1 = 0
+    //var index1 = 0
+    var indexMem = 1
     var delegateAlert: CommunicationAlert?
     var delegateScreen: UpdateDisplayCalcul?
     var total = 0
+    var memTotals: [String] = [String()]
 
    // var total = calculateTotal
 
@@ -39,6 +41,18 @@ class Calculate {
             if stringNumber.isEmpty {
               delegateAlert?.itIsAlert(title: "Zéro!", message: "Expression incorrecte !")
                 return false
+            }
+        }
+        return true
+    }
+    
+    var canAccessTheMemory: Bool {
+        if let memTotal = memTotals.last {
+            if memTotal.isEmpty {
+                if memTotals.count == 1 {
+                    delegateAlert?.itIsAlert(title: "Rien", message: "Faite un premier calcul !")
+                  return false
+                }
             }
         }
         return true
@@ -94,13 +108,32 @@ class Calculate {
                 }
             }
             delegateScreen?.itIsResultt(total: total)
-
         }
 
+    private func accessResultInMem() {
+        if !canAccessTheMemory {
+            return
+        }
+        let text = memTotals[indexMem]
+        delegateScreen?.itIsToDisplay(text: text)
+    }
+
+    func choiceMemory() {
+        if indexMem <= memTotals.count - 1 {
+            accessResultInMem()
+            indexMem += 1
+        } else {
+            indexMem = 0
+            accessResultInMem()
+            indexMem += 1
+        }
+    }
+
     func clear() {
+        total = 0
         stringNumbers = [String()]
         operators = [.addition]
-        index1 = 0
+        //index1 = 0
     }
 }
 

@@ -15,6 +15,7 @@ class CalculViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     @IBOutlet var operatorButtons: [UIButton]!
+
     override func viewDidLoad() {
         calculates.delegateAlert = self
         calculates.delegateScreen = self
@@ -43,6 +44,14 @@ class CalculViewController: UIViewController {
     @IBAction func equal() {
         calculates.calculateTotal()
         calculates.clear()
+    }
+
+    @IBAction func mem() {
+        calculates.choiceMemory()
+    }
+
+    @IBAction func cleanMem() {
+
     }
 
 }

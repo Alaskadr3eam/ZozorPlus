@@ -7,11 +7,14 @@
 //
 
 import Foundation
+
 extension CalculViewController: UpdateDisplayCalcul {
 
     func itIsResultt(total: Int) {
         textView.text += "=\(total)"
-        }
+        let result = textView.text
+        calculates.memTotals.append(result!)
+    }
 
     func itIsToDisplay(text: String) {
         textView.text = text
