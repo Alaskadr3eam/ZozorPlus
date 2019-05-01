@@ -33,7 +33,6 @@
 
 /* Begin PBXFileReference section */
 		313A6D192268797800521849 /* ViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExt.swift; sourceTree = "<group>"; };
-		313A6D1A2268797D00521849 /* ButtonExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExt.swift; sourceTree = "<group>"; };
 		313A6D1B22687AB200521849 /* DoubleExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExt.swift; sourceTree = "<group>"; };
 		313A6D1E2268E25500521849 /* protocolAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = protocolAlert.swift; sourceTree = "<group>"; };
 		313A6D222269AD4100521849 /* protocoleUpdateDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = protocoleUpdateDisplay.swift; sourceTree = "<group>"; };
@@ -112,7 +111,6 @@
 				313A6D192268797800521849 /* ViewControllerExt.swift */,
 				313A6D1E2268E25500521849 /* protocolAlert.swift */,
 				313A6D222269AD4100521849 /* protocoleUpdateDisplay.swift */,
-				313A6D1A2268797D00521849 /* ButtonExt.swift */,
 				313A6D1B22687AB200521849 /* DoubleExt.swift */,
 			);
 			path = UtilityExt;

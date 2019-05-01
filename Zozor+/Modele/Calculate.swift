@@ -11,21 +11,21 @@ import Foundation
 class Calculate {
 
     // MARK: - Properties
-    var stringNumbers: [String] = [String()]
+    var stringNumbers: [String] = [String]()
     var operators: [Operator] = [.addition]
     //var index1 = 0
-    var indexMem = 1
+    var indexMem = 0
     var delegateAlert: CommunicationAlert?
     var delegateScreen: UpdateDisplayCalcul?
-    var total = 0
-    var memTotals: [String] = [String()]
+    var total = 0.0
+    var memTotals: [String] = [String]()
 
    // var total = calculateTotal
 
     var isExpressionCorrect: Bool {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
-                if stringNumbers.count == 1 {
+                if stringNumbers.isEmpty {
                     delegateAlert?.itIsAlert(title: "Zéro!", message: "Démarrez un nouveau calcul !")
                 } else {
                     delegateAlert?.itIsAlert(title: "Zéro", message: "Entrez une expression correcte !")
@@ -45,34 +45,58 @@ class Calculate {
         }
         return true
     }
-    
+
     var canAccessTheMemory: Bool {
-        if let memTotal = memTotals.last {
-            if memTotal.isEmpty {
-                if memTotals.count == 1 {
+        if memTotals.isEmpty {
+           // if memTotal.isEmpty {
+           //     if memTotals.isEmpty {
                     delegateAlert?.itIsAlert(title: "Rien", message: "Faite un premier calcul !")
                   return false
                 }
-            }
+        return true
+    }
+
+    var memoryIsFull: Bool {
+        if memTotals.count == 8 {
+            delegateAlert?.itIsAlert(title: "Attention", message: "plus que deux calculs avant effacement de la mémoire")
+            return true
+        }
+        if memTotals.count == 10 {
+            delegateAlert?.itIsAlert(title: "Attention", message: "mémoire effacé")
+            memTotals = [String]()
+            return true
         }
         return true
     }
 
     func addNewNumber(_ newNumber: Int) {
-        if let stringNumber = stringNumbers.last {
+       // stringNumbers.append(String(newNumber))
+        if stringNumbers.count == 0 {
+            let stringNumber = "\(newNumber)"
+            stringNumbers.append(stringNumber)
+        } else if newNumber == 10 {
+            if let stringNumber = stringNumbers.last {
+                var stringNumberMutable = stringNumber
+                stringNumberMutable += "."
+                stringNumbers[stringNumbers.count - 1] = stringNumberMutable
+            }
+        } else {
+            if let stringNumber = stringNumbers.last {
             var stringNumberMutable = stringNumber
             stringNumberMutable += "\(newNumber)"
-            stringNumbers[stringNumbers.count-1] = stringNumberMutable
+            stringNumbers[stringNumbers.count - 1] = stringNumberMutable
+
+            }
         }
         updateDisplay()
     }
 
     func updateDisplay() {
         var text = ""
-        for (index, stringNumber) in  stringNumbers.enumerated() {
+        for (index2, stringNumber) in  stringNumbers.enumerated() {
             // Add operator
-            if index > 0 {
-                text += operators[index].displayString
+            if index2 > 0 {
+                text += operators[index2].displayString
             }
             // Add number
             text += stringNumber
@@ -94,7 +118,7 @@ class Calculate {
         }
             //var total = 0
             for (index, stringNumber) in stringNumbers.enumerated() {
-                if let number = Int(stringNumber) {
+                if let number = Double(stringNumber) {
                     switch operators[index] {
                     case .addition:
                         total += number
@@ -135,6 +159,14 @@ class Calculate {
         operators = [.addition]
         //index1 = 0
     }
+
+    func addMem(result: String ) {
+        let result = result
+        if !memoryIsFull {
+            return
+        }
+        memTotals.append(result)
+    }
 }
 
 protocol CommunicationAlert {
@@ -142,6 +174,14 @@ protocol CommunicationAlert {
 }
 
 protocol UpdateDisplayCalcul {
-    func itIsResultt(total: Int)
+    func itIsResultt(total: Double)
     func itIsToDisplay(text: String)
+}
+
+extension Double {
+    func formatToString() -> String {
+        let isInteger = floor(self) == self
+        let stringToReturn = isInteger ? "\(Int(self))" : "\(self)"
+        return stringToReturn
+    }
 }

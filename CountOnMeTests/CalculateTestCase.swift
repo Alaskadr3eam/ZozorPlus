@@ -28,9 +28,18 @@ class CalculateTestCase: XCTestCase {
     }
 
     func testIsExpressionCorrect() {
+        calculates.addNewNumber(1)
+        calculates.addOperation(.soustraction)
+        calculates.addNewNumber(1)
+
+        XCTAssertTrue(calculates.isExpressionCorrect)
     }
 
     func testAddOperator() {
+
+        calculates.addOperation(.soustraction)
+
+        XCTAssertFalse(calculates.canAddOperator)
 
     }
 
@@ -38,7 +47,7 @@ class CalculateTestCase: XCTestCase {
 
         calculates.addNewNumber(1)
 
-        XCTAssert(calculates.stringNumbers[0] == "1")
+       XCTAssert(calculates.stringNumbers[0] == "1")
 
     }
 
@@ -58,9 +67,10 @@ class CalculateTestCase: XCTestCase {
 
     func testGivenOperation_WhenSixAndFiveAreDivided_ThenResultShouldBeZero() {
 
-        operation(5, .division, 6)
+        operation(5, .division, 2)
 
-        XCTAssert(calculates.total == 0)
+        XCTAssertFalse(calculates.total == 0)
+        XCTAssertTrue(calculates.total == 2.5)
     }
 
     func testtestGivenOperation_WhenSixAndFiveAreMultiplied_ThenResultShouldBeThirty() {
@@ -79,7 +89,8 @@ class CalculateTestCase: XCTestCase {
         operation(6, .addition, 6)
         calculates.clear()
 
-        XCTAssert(calculates.memTotals.last == "5+6=11")
+        XCTAssertNil(calculates.memTotals.last)
+        XCTAssertNil(calculates.memTotals.first)
 
     }
 

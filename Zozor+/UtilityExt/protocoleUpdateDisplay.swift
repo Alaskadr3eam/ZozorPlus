@@ -10,14 +10,20 @@ import Foundation
 
 extension CalculViewController: UpdateDisplayCalcul {
 
-    func itIsResultt(total: Int) {
-        textView.text += "=\(total)"
-        let result = textView.text
-        calculates.memTotals.append(result!)
+    func itIsResultt(total: Double) {
+
+        textView.text += "=\(total.formatToString())"
+        calculates.addMem(result: textView.text)
+        /*let result = textView.text
+        if !calculates.memoryIsFull {
+            return
+        }
+        calculates.memTotals.append(result!)*/
     }
 
     func itIsToDisplay(text: String) {
         textView.text = text
     }
 }
+
 // textView.text = textView.text + "=\(total)"
