@@ -14,16 +14,9 @@ extension CalculViewController: UpdateDisplayCalcul {
 
         textView.text += "=\(total.formatToString())"
         calculates.addMem(result: textView.text)
-        /*let result = textView.text
-        if !calculates.memoryIsFull {
-            return
-        }
-        calculates.memTotals.append(result!)*/
     }
 
     func itIsToDisplay(text: String) {
         textView.text = text
     }
 }
-
-// textView.text = textView.text + "=\(total)"

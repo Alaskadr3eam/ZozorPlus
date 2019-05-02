@@ -171,10 +171,3 @@ protocol UpdateDisplayCalcul {
     func itIsToDisplay(text: String)
 }
 
-extension Double {
-    func formatToString() -> String {
-        let isInteger = floor(self) == self
-        let stringToReturn = isInteger ? "\(Int(self))" : "\(self)"
-        return stringToReturn
-    }
-}
