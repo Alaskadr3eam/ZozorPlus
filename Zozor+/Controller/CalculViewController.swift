@@ -17,7 +17,7 @@ class CalculViewController: UIViewController {
     @IBOutlet var operatorButtons: [UIButton]!
 
     override func viewDidLoad() {
-        button()
+        buttonCornerRadius()
         calculates.delegateAlert = self
         calculates.delegateScreen = self
     }
@@ -50,8 +50,8 @@ class CalculViewController: UIViewController {
     @IBAction func mem() {
         calculates.choiceMemory()
     }
-
-    func button() {
+//func for add cornerRadius of button
+    func buttonCornerRadius() {
         for indexButton in 0..<numberButtons.count {
             numberButtons[indexButton].layer.cornerRadius = 20
         }

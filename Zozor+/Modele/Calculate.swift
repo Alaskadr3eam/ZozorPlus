@@ -13,14 +13,11 @@ class Calculate {
     // MARK: - Properties
     var stringNumbers: [String] = [String]()
     var operators: [Operator] = [.addition]
-    //var index1 = 0
     var indexMem = 0
     var delegateAlert: CommunicationAlert?
     var delegateScreen: UpdateDisplayCalcul?
     var total = 0.0
     var memTotals: [String] = [String]()
-
-   // var total = calculateTotal
 
     var isExpressionCorrect: Bool {
         if let stringNumber = stringNumbers.last {
@@ -70,7 +67,6 @@ class Calculate {
     }
 
     func addNewNumber(_ newNumber: Int) {
-       // stringNumbers.append(String(newNumber))
         if stringNumbers.count == 0 {
             let stringNumber = "\(newNumber)"
             stringNumbers.append(stringNumber)
@@ -85,7 +81,6 @@ class Calculate {
             var stringNumberMutable = stringNumber
             stringNumberMutable += "\(newNumber)"
             stringNumbers[stringNumbers.count - 1] = stringNumberMutable
-
             }
         }
         updateDisplay()
@@ -94,8 +89,8 @@ class Calculate {
     func updateDisplay() {
         var text = ""
         for (index2, stringNumber) in  stringNumbers.enumerated() {
-            // Add operator
             if index2 > 0 {
+                //add operator
                 text += operators[index2].displayString
             }
             // Add number
@@ -116,7 +111,6 @@ class Calculate {
         if !isExpressionCorrect {
             return
         }
-            //var total = 0
             for (index, stringNumber) in stringNumbers.enumerated() {
                 if let number = Double(stringNumber) {
                     switch operators[index] {
@@ -157,7 +151,6 @@ class Calculate {
         total = 0
         stringNumbers = [String()]
         operators = [.addition]
-        //index1 = 0
     }
 
     func addMem(result: String ) {
