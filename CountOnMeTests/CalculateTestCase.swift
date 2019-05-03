@@ -135,8 +135,8 @@ class CalculateTestCase: XCTestCase {
         calculates.clear()
         operationPlusMemory(150, .soustraction, 50)
         calculates.clear()
-        
 
+        XCTAssertTrue(calculates.memoryCalcul.last == "150-50=100")
         XCTAssertTrue(calculates.memoryCalcul.first == "1+1=2")
         XCTAssertTrue(calculates.memoryCalcul.count == 3)
     }
