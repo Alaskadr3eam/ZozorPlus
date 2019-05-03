@@ -11,7 +11,8 @@
 		313A6D232269AD4100521849 /* protocoleUpdateDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313A6D222269AD4100521849 /* protocoleUpdateDisplay.swift */; };
 		313A6D242269B0B800521849 /* ViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313A6D192268797800521849 /* ViewControllerExt.swift */; };
 		313A6D352269C25200521849 /* CalculateTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313A6D342269C25200521849 /* CalculateTestCase.swift */; };
-		315B9DAB227B711D00C686DA /* DoubleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313A6D1B22687AB200521849 /* DoubleExt.swift */; };
+		315B9DAC227B72A200C686DA /* DoubleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313A6D1B22687AB200521849 /* DoubleExt.swift */; };
+		315B9DAE227B757900C686DA /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315B9DAD227B757900C686DA /* CustomButton.swift */; };
 		31D9A23C225F730000A536D6 /* Calculate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D9A23B225F730000A536D6 /* Calculate.swift */; };
 		31D9A23E2260714D00A536D6 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31D9A23D2260714D00A536D6 /* Operator.swift */; };
 		C926DADD1D7581BB00477020 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C926DADC1D7581BB00477020 /* AppDelegate.swift */; };
@@ -40,6 +41,7 @@
 		313A6D2A2269C1DE00521849 /* CountOnMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountOnMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		313A6D2E2269C1DE00521849 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		313A6D342269C25200521849 /* CalculateTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateTestCase.swift; sourceTree = "<group>"; };
+		315B9DAD227B757900C686DA /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		31D9A23B225F730000A536D6 /* Calculate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculate.swift; sourceTree = "<group>"; };
 		31D9A23D2260714D00A536D6 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		C926DAD91D7581BB00477020 /* CountOnMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountOnMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,13 +72,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		313A6D0C2267810F00521849 /* Modele */ = {
+		313A6D0C2267810F00521849 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				31D9A23B225F730000A536D6 /* Calculate.swift */,
 				31D9A23D2260714D00A536D6 /* Operator.swift */,
 			);
-			path = Modele;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		313A6D0D2267812F00521849 /* View */ = {
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				C926DADE1D7581BB00477020 /* CalculViewController.swift */,
+				315B9DAD227B757900C686DA /* CustomButton.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -152,7 +155,7 @@
 				313A6D0F2267818B00521849 /* SupportingFile */,
 				313A6D0E2267815200521849 /* Controller */,
 				313A6D0D2267812F00521849 /* View */,
-				313A6D0C2267810F00521849 /* Modele */,
+				313A6D0C2267810F00521849 /* Model */,
 			);
 			name = CountOnMe;
 			path = "Zozor+";
@@ -295,11 +298,12 @@
 			files = (
 				31D9A23C225F730000A536D6 /* Calculate.swift in Sources */,
 				C926DADF1D7581BB00477020 /* CalculViewController.swift in Sources */,
+				315B9DAE227B757900C686DA /* CustomButton.swift in Sources */,
 				31D9A23E2260714D00A536D6 /* Operator.swift in Sources */,
 				313A6D232269AD4100521849 /* protocoleUpdateDisplay.swift in Sources */,
 				313A6D242269B0B800521849 /* ViewControllerExt.swift in Sources */,
 				313A6D1F2268E25500521849 /* protocolAlert.swift in Sources */,
-				315B9DAB227B711D00C686DA /* DoubleExt.swift in Sources */,
+				315B9DAC227B72A200C686DA /* DoubleExt.swift in Sources */,
 				C926DADD1D7581BB00477020 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

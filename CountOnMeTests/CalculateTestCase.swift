@@ -26,6 +26,13 @@ class CalculateTestCase: XCTestCase {
         calculates.calculateTotal()
 
     }
+    
+    func operationPlusMemory(_ one:Int,_ sign: Operator,_ two: Int) {
+        calculates.addNewNumberEveryWhere(one)
+        calculates.addOperation(sign)
+        calculates.addNewNumberEveryWhere(one)
+        calculates.calculateTotal()
+    }
 
     func testIsExpressionCorrect() {
         calculates.addNewNumber(1)
@@ -33,6 +40,14 @@ class CalculateTestCase: XCTestCase {
         calculates.addNewNumber(1)
 
         XCTAssertTrue(calculates.isExpressionCorrect)
+    }
+    
+    func testIsExpressionCorrectFalse() {
+        calculates.addNewNumber(1)
+        calculates.addOperation(.soustraction)
+        calculates.addOperation(.soustraction)
+
+        XCTAssertFalse(calculates.isExpressionCorrect)
     }
 
     func testAddOperator() {
@@ -82,27 +97,48 @@ class CalculateTestCase: XCTestCase {
         XCTAssertFalse(calculates.total == 20)
     }
 
-    func testGivenMemoire_WhenOperationFinished_ThenOperationIsStockedMemories() {
-
-        operation(5, .addition, 6)
-        calculates.clear()
-        operation(6, .addition, 6)
-        calculates.clear()
-
-        XCTAssertNil(calculates.memTotals.last)
-        XCTAssertNil(calculates.memTotals.first)
-
-    }
-
     func testClear() {
         operation(5, .soustraction, 6)
         calculates.total = -1
 
         calculates.clear()
 
-        XCTAssertTrue(calculates.stringNumbers == [String()])
+        XCTAssertTrue(calculates.stringNumbers == [String]())
         XCTAssertTrue(calculates.operators == [.addition])
         XCTAssertTrue(calculates.total == 0)
+    }
+
+    func testAddMem() {
+        calculates.addMem("100")
+
+        XCTAssertTrue(calculates.memoryCalcul.last == "100")
+    }
+
+    func testAddNewNumberInMemoryOne() {
+        calculates.addNewNumberInMem(1)
+        calculates.addOperation(.soustraction)
+        calculates.addNewNumberInMem(1)
+
+        XCTAssertTrue(calculates.memTotals.last == "1-1")
+    }
+
+    func testAddNewNumberInMemoryEleven() {
+        calculates.addNewNumberInMem(11)
+
+        XCTAssertTrue(calculates.memTotals.last == "11")
+    }
+
+    func testMemory() {
+        operationPlusMemory(1, .addition, 1)
+        calculates.clear()
+        operationPlusMemory(5, .addition, 6)
+        calculates.clear()
+        operationPlusMemory(150, .soustraction, 50)
+        calculates.clear()
+        
+
+        XCTAssertTrue(calculates.memoryCalcul.first == "1+1=2")
+        XCTAssertTrue(calculates.memoryCalcul.count == 3)
     }
 
 }

@@ -17,15 +17,14 @@ class CalculViewController: UIViewController {
     @IBOutlet var operatorButtons: [UIButton]!
 
     override func viewDidLoad() {
-        buttonCornerRadius()
+
         calculates.delegateAlert = self
         calculates.delegateScreen = self
     }
 
-    @IBAction func tappedNumberButton(_ sender: UIButton) {
-        for (index, numberButton) in numberButtons.enumerated() where sender == numberButton {
-                calculates.addNewNumber(index)
-            }
+    @IBAction func bouton(_ sender: UIButton) {
+        let index = sender.tag - 100
+        calculates.addNewNumberEveryWhere(index)
     }
 
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
@@ -38,23 +37,13 @@ class CalculViewController: UIViewController {
                 calculates.addOperation(.multiplication)
             case 4:
                 calculates.addOperation(.division)
+            case 5:
+                calculates.calculateTotal()
+                calculates.clear()
+            case 6:
+                calculates.choiceMemory()
             default: break
             }
-    }
-
-    @IBAction func equal() {
-        calculates.calculateTotal()
-        calculates.clear()
-    }
-
-    @IBAction func mem() {
-        calculates.choiceMemory()
-    }
-//func for add cornerRadius of button
-    func buttonCornerRadius() {
-        for indexButton in 0..<numberButtons.count {
-            numberButtons[indexButton].layer.cornerRadius = 20
-        }
     }
 
 }
