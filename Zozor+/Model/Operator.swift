@@ -16,9 +16,9 @@ enum Operator {
         case.addition:
             return "+"
         case.division:
-            return "÷"
+            return "/"
         case.multiplication:
-            return "x"
+            return "*"
         case.soustraction:
             return "-"
         }

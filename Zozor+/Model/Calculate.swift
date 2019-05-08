@@ -16,36 +16,33 @@ class Calculate {
     var indexMem = 0
     var delegateAlert: CommunicationAlert?
     var delegateScreen: UpdateDisplayCalcul?
-    var total = 0.0
-    var memTotals: [String] = [String]()
+    var calculFinal = String()
+    var memTotals = String()
+    var total = Double()
     var memoryCalcul: [String] = [String]()
 
      var isExpressionCorrect: Bool {
-        if let stringNumber = stringNumbers.last {
-            if stringNumber.isEmpty {
+        if stringNumbers.last?.isEmpty == true || stringNumbers.count == 0 {
                 if stringNumbers.isEmpty {
                     delegateAlert?.itIsAlert(title: "Zéro!", message: "Démarrez un nouveau calcul !")
                 } else {
                     delegateAlert?.itIsAlert(title: "Zéro", message: "Entrez une expression correcte !")
                 }
                 return false
-            }
         }
         return true
     }
 
     var canAddOperator: Bool {
-        if let stringNumber = stringNumbers.last {
-            if stringNumber.isEmpty {
+        if stringNumbers.count == 0 || stringNumbers.last?.isEmpty == true {
               delegateAlert?.itIsAlert(title: "Zéro!", message: "Expression incorrecte !")
                 return false
-            }
         }
         return true
     }
 
     var canAccessTheMemory: Bool {
-        if memTotals.isEmpty {
+        if memoryCalcul.isEmpty {
                     delegateAlert?.itIsAlert(title: "Rien", message: "Faite un premier calcul !")
                   return false
                 }
@@ -78,6 +75,14 @@ class Calculate {
         addNewNumberInMem(newNumber)
     }
 
+    func canAddOperatorDisplay(_ signOperator: String) {
+        if let stringNumber = stringNumbers.last {
+            var stringNumberMutable = stringNumber
+            stringNumberMutable += signOperator
+            memTotals = stringNumberMutable
+        }
+    }
+
     func addOperation(_ sign: Operator) {
         if canAddOperator {
             operators.append(sign)
@@ -85,37 +90,40 @@ class Calculate {
             updateDisplay()
             switch sign {
             case.addition:
-                canAddOperatorMem("+")
+                addOperatorMem("+")
             case.soustraction:
-                canAddOperatorMem("-")
+                addOperatorMem("-")
             case.division:
-                canAddOperatorMem("÷")
+                addOperatorMem("/")
             case.multiplication:
-                canAddOperatorMem("x")
+                addOperatorMem("*")
             }
         }
+    }
+//function to add .0 to the last number of the calculation so that the result is in decimal if necessary
+    func addPointZeroIfNesserayForCalcul() {
+        let letters = CharacterSet.init(charactersIn: ".")
+        let range = memTotals.rangeOfCharacter(from: letters)
+        if range != nil {
+            calculFinal = memTotals
+        } else {
+            let stringNumberMem = memTotals
+            var stringNumberMemMutable = stringNumberMem
+            stringNumberMemMutable += ".0"
+            calculFinal = stringNumberMemMutable
+            }
     }
 
     func calculateTotal() {
         if !isExpressionCorrect {
             return
         }
-            for (index, stringNumber) in stringNumbers.enumerated() {
-                if let number = Double(stringNumber) {
-                    switch operators[index] {
-                    case .addition:
-                        total += number
-                    case .soustraction:
-                        total -= number
-                    case .multiplication:
-                        total *= number
-                    case .division:
-                        total /= number
-                    }
-                }
-            }
+        addPointZeroIfNesserayForCalcul()
+        let mathExpression = NSExpression(format: calculFinal)
+        guard let mathValue = mathExpression.expressionValue(with: nil, context: nil) as? Double else { return }
+        total = mathValue
         totalRecoveryForMem(total)
-            delegateScreen?.itIsResultt(total: total.formatToString())
+        delegateScreen?.itIsResultt(total: total.formatToString())
         }
 
     // MARK: - Func Display
@@ -133,40 +141,36 @@ class Calculate {
     }
 
     // MARK: - Func Memory
-    func canAddOperatorMem(_ signOperator: String) {
-        if let stringNumberMem = memTotals.last {
+    func addOperatorMem(_ signOperator: String) {
+            let stringNumberMem = memTotals
             var stringNumberMemMutable = stringNumberMem
             stringNumberMemMutable += signOperator
-            memTotals[memTotals.count - 1] = stringNumberMemMutable
-        }
+            memTotals = stringNumberMemMutable
     }
 
     func addNewNumberInMem(_ newNumberMem: Int) {
-        if memTotals.count == 0 {
+        if memTotals.isEmpty {
             let stringNumberMem = "\(newNumberMem)"
-            memTotals.append(stringNumberMem)
+            memTotals = stringNumberMem
         } else if newNumberMem == 10 {
-            if let stringNumberMem = memTotals.last {
+            let stringNumberMem = memTotals
                 var stringNumberMemMutable = stringNumberMem
                 stringNumberMemMutable += "."
-                memTotals[memTotals.count - 1] = stringNumberMemMutable
-            }
+            memTotals = stringNumberMemMutable
         } else {
-            if let stringNumberMem = memTotals.last {
-                var stringNumberMemMutable = stringNumberMem
-                stringNumberMemMutable += "\(newNumberMem)"
-                memTotals[memTotals.count - 1] = stringNumberMemMutable
+            let stringNumberMem = memTotals
+            var stringNumberMemMutable = stringNumberMem
+            stringNumberMemMutable += "\(newNumberMem)"
+            memTotals = stringNumberMemMutable
             }
-        }
     }
 
     func totalRecoveryForMem(_ result: Double) {
-        if let stringNumberMem = memTotals.last {
+           let stringNumberMem = memTotals
             var stringNumberMemMutable = stringNumberMem
             stringNumberMemMutable += "=\(result.formatToString())"
-            memTotals[memTotals.count - 1] = stringNumberMemMutable
+            memTotals = stringNumberMemMutable
             addMem(stringNumberMemMutable)
-        }
     }
 
     func accessResultInMem() {
@@ -204,12 +208,13 @@ class Calculate {
         memoryCalcul.append(result)
     }
 
-    // MARK - Func clear re-init
+    // MARK: - Func clear re-init
     func clear() {
-        total = 0
         stringNumbers = [String]()
         operators = [.addition]
-        memTotals = [String]()
+        memTotals = String()
+        calculFinal = String()
+        total = Double()
     }
 }
 

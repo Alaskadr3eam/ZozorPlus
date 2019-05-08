@@ -18,19 +18,26 @@ class CalculateTestCase: XCTestCase {
         calculates = Calculate()
     }
 
-    func operation(_ one: Int, _ sign: Operator, _ two: Int) {
-
-        calculates.addNewNumber(one)
+    func operation(_ one:Int,_ sign:Operator,_ two:Int) {
+        calculates.addNewNumberEveryWhere(one)
         calculates.addOperation(sign)
-        calculates.addNewNumber(two)
+        calculates.addNewNumberEveryWhere(two)
         calculates.calculateTotal()
-
     }
-    
-    func operationPlusMemory(_ one:Int,_ sign: Operator,_ two: Int) {
+
+    func operationCompare(_ one:Int,_ sign:Operator,_ two:Int) {
         calculates.addNewNumberEveryWhere(one)
         calculates.addOperation(sign)
+        calculates.addNewNumberEveryWhere(two)
+        calculates.addPointZeroIfNesserayForCalcul()
+    }
+
+    func verfiyPriorityRulesCalcul(_ one: Int,_ sign: Operator,_ two: Int,_ sign2: Operator,_ three: Int) {
         calculates.addNewNumberEveryWhere(one)
+        calculates.addOperation(sign)
+        calculates.addNewNumberEveryWhere(two)
+        calculates.addOperation(sign2)
+        calculates.addNewNumberEveryWhere(three)
         calculates.calculateTotal()
     }
 
@@ -41,7 +48,7 @@ class CalculateTestCase: XCTestCase {
 
         XCTAssertTrue(calculates.isExpressionCorrect)
     }
-    
+
     func testIsExpressionCorrectFalse() {
         calculates.addNewNumber(1)
         calculates.addOperation(.soustraction)
@@ -84,7 +91,7 @@ class CalculateTestCase: XCTestCase {
 
         operation(5, .division, 2)
 
-        XCTAssertFalse(calculates.total == 0)
+        XCTAssertFalse(calculates.total == 2)
         XCTAssertTrue(calculates.total == 2.5)
     }
 
@@ -93,19 +100,22 @@ class CalculateTestCase: XCTestCase {
         operation(5, .multiplication, 6)
 
         //XCTAssert(calculates.total == 30)
+        XCTAssertFalse(calculates.total == 35)
         XCTAssertTrue(calculates.total == 30)
-        XCTAssertFalse(calculates.total == 20)
     }
 
     func testClear() {
         operation(5, .soustraction, 6)
-        calculates.total = -1
+        calculates.total = -1.0
 
         calculates.clear()
 
         XCTAssertTrue(calculates.stringNumbers == [String]())
         XCTAssertTrue(calculates.operators == [.addition])
-        XCTAssertTrue(calculates.total == 0)
+        XCTAssertTrue(calculates.total == Double())
+        XCTAssertTrue(calculates.calculFinal == String())
+        XCTAssertTrue(calculates.memTotals == String())
+        XCTAssertEqual(calculates.calculFinal, calculates.memTotals)
     }
 
     func testAddMem() {
@@ -116,29 +126,56 @@ class CalculateTestCase: XCTestCase {
 
     func testAddNewNumberInMemoryOne() {
         calculates.addNewNumberInMem(1)
-        calculates.addOperation(.soustraction)
+        calculates.addOperatorMem("-")
         calculates.addNewNumberInMem(1)
 
-        XCTAssertTrue(calculates.memTotals.last == "1-1")
+        XCTAssertNil(calculates.memoryCalcul.last)
+        XCTAssertTrue(calculates.memTotals == "1-1")
     }
 
     func testAddNewNumberInMemoryEleven() {
         calculates.addNewNumberInMem(11)
 
-        XCTAssertTrue(calculates.memTotals.last == "11")
+        XCTAssertTrue(calculates.memTotals == "11")
     }
 
     func testMemory() {
-        operationPlusMemory(1, .addition, 1)
+        operation(1, .addition, 1)
         calculates.clear()
-        operationPlusMemory(5, .addition, 6)
+        operation(5, .addition, 6)
         calculates.clear()
-        operationPlusMemory(150, .soustraction, 50)
+        operation(150, .soustraction, 50)
         calculates.clear()
 
         XCTAssertTrue(calculates.memoryCalcul.last == "150-50=100")
         XCTAssertTrue(calculates.memoryCalcul.first == "1+1=2")
         XCTAssertTrue(calculates.memoryCalcul.count == 3)
+    }
+
+    func testGivenAddPointInFormuleFotCalcul() {
+        operationCompare(1, .addition, 1)
+
+        XCTAssertFalse(calculates.memTotals == calculates.calculFinal)
+        XCTAssertTrue(calculates.memTotals == "1+1")
+        XCTAssertTrue(calculates.calculFinal == "1+1.0")
+    }
+    // MARK: - test suite de calcul pour la priorité
+    func testOnePlusFive() {
+        operation(1, .addition, 5)
+
+        XCTAssertTrue(calculates.total == 6)
+    }
+
+    func testSixDivide2() {
+        operation(6, .division, 2)
+
+        XCTAssertTrue(calculates.total == 3)
+    }
+
+    func testOperationOnePlusFiveDividedByTwo() {
+        verfiyPriorityRulesCalcul(1, .addition, 5, .division, 2)
+
+        XCTAssertTrue(calculates.total == 3.5)
     }
 
 }

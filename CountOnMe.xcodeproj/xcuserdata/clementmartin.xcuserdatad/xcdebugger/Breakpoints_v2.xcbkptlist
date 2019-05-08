@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CountOnMeTests/CalculateTestCase.swift"
-            timestampString = "578598917.731333"
+            timestampString = "579016718.990429"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "testAddNewNumber()"
             landmarkType = "7">
          </BreakpointContent>
@@ -52,44 +52,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Zozor+/Controller/CalculViewController.swift"
-            timestampString = "578598917.732268"
+            timestampString = "579016718.9914761"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "bouton(_:)"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "tappedOperatorButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CountOnMeTests/CalculateTestCase.swift"
-            timestampString = "578598917.732386"
+            timestampString = "579016718.991644"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "testMemory()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Zozor+/Model/Calculate.swift"
-            timestampString = "578598917.7330019"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "clear()"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "testAddNewNumberInMemoryOne()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
